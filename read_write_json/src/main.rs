@@ -1,21 +1,44 @@
-use std::{error::Error, io::Read};
-use serde_json::{Value};
-use std::io;
+use std::{error::Error};
+use serde::{Serialize,Deserialize};
+use serde_json;
+
+#[derive(Serialize,Deserialize,Debug)]
+struct Data{
+    name:String,
+    version:String,
+    description:String,
+    author:String,
+    license:String,
+    id:i32,
+    dependencies:Dependencies
+}
+
+#[derive(Serialize,Deserialize,Debug)]
+struct Dependencies{
+    express:String,
+    lodash:String
+}
+fn read_json_typed(raw_json:&str) -> Result< Data ,serde_json::Error> {
+    // parse the json data into a rust value ( struct ) -> Data !
+     serde_json::from_str(raw_json)
+}
 
 fn read_from_json(path:&str)->Result<(),Box<dyn Error>>{
-
-    let  reader  : Value = serde_json::from_str(&std::fs::read_to_string(path)?)?;
+     
+    let read_file = std::fs::read_to_string(path)?;
+    let parsed_file = read_json_typed(&read_file)?;
     
-    println!("{:#?}",reader);
+
+    println!("{:#?}",parsed_file);
     Ok(())
 } 
 
-fn write_to_json(path:&str,content:&str)->Result<(),Box<dyn Error>>{
+// fn write_to_json(path:&str,content:&str)->Result<(),Box<dyn Error>>{
 
                     
 
-    Ok(())
-}
+//     Ok(())
+// }
 
 
 
@@ -24,17 +47,5 @@ fn main(){
     if let Err(e) = read_from_json("./data.json"){
         eprintln!("{}",e);
     }
-    
-    println!("Write name of the file \n ");
-    let mut  file_name =  String::new();
-    io::stdin().read_line(&mut file_name).expect("Error from read line");
-    println!("Write content\n ");
-    let mut  content  =  String::new();
-    io::stdin().read_line(&mut content).expect("Error from read line");
-
-
-    // if let Err(e) = write_to_json(){
-    //     eprintln!("{}",e);
-    // }
     
 }
