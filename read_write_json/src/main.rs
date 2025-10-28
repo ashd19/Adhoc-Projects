@@ -12,7 +12,7 @@ fn read_from_json(path:&str)->Result<(),Box<dyn Error>>{
 
 fn write_to_json(path:&str,content:&str)->Result<(),Box<dyn Error>>{
 
-            
+                    
 
     Ok(())
 }
