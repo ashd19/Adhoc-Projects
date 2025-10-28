@@ -1,0 +1,18 @@
+{
+  "name": "ashton",
+  "age": 20,
+  "roll_no": 28,
+  "skills": [
+    "solana",
+    "ethereum",
+    "backend"
+  ],
+  "goals": {
+    "freelance": "message",
+    "platforms": [
+      "superteam",
+      "bounties",
+      "hackathons"
+    ]
+  }
+}
