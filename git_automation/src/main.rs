@@ -16,7 +16,7 @@ fn main() {
         .status()
         .expect("Failed to run git add");
     if !status.success() {
-        eprintln!("git add failed");
+        eprintln!("git add failed ");
         exit(1);
     }
 
